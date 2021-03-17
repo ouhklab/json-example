@@ -16,10 +16,8 @@ function retrieveDataFromJson() {
             if (localStorage) {
                 localStorage.setItem("fruits", JSON.stringify(fruits));
             }
-
         }
     };
-
     xhr.open("get", url);
     xhr.send();
 }
