@@ -8,6 +8,9 @@ function retrieveDataFromJson() {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
+            var description = JSON.parse(xhr.response).description;
+            displayDescription(description);
+    
             var fruits = JSON.parse(xhr.response).fruits;
             displayData(fruits);
 
@@ -16,17 +19,24 @@ function retrieveDataFromJson() {
             if (localStorage) {
                 localStorage.setItem("fruits", JSON.stringify(fruits));
             }
+
         }
     };
+
     xhr.open("get", url);
     xhr.send();
 }
 
-function displayData(fruits) {
-    fruits.forEach(addRow);
+function displayDescription(description) {
+    document.getElementById("description").innerHTML = description;
 }
 
-function addRow(fruit) {
+function displayData(fruits) {
+    fruits.forEach(addFruit);
+}
+
+function addFruit(fruit) {
+    var tcontent = document.getElementById("tcontent");
     var row = tcontent.insertRow();
     var nameCell = row.insertCell();
     nameCell.innerHTML = fruit.name;
